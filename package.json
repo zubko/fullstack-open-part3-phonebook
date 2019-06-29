@@ -1,0 +1,22 @@
+{
+  "name": "fullstack-open-part3-phonebook",
+  "version": "1.0.0",
+  "description": "Full Stack Open Part 3 Phonebook exercise",
+  "main": "index.js",
+  "author": "Alexander Zubko",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node index.js",
+    "watch": "nodemon index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1",
+    "prettier": "^1.18.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1"
+  }
+}

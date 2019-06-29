@@ -1,0 +1,20 @@
+@host = http://localhost:3001/api
+GET {{host}}/persons
+
+### Existing note
+GET {{host}}/persons/1
+
+### Not existing note
+GET {{host}}/persons/1234
+
+### Delete note
+DELETE {{host}}/persons/1
+
+### Create note
+POST  {{host}}/persons
+content-type: application/json
+
+{
+  "name": "Arto Hellas 11",
+  "number": "040-123456123"
+}
