@@ -10,7 +10,8 @@
     "start": "node backend",
     "watch": "nodemon backend",
     "build": "cd frontend && yarn install && yarn build",
-    "deploy": "pit push heroku master"
+    "deploy": "git push heroku master",
+    "log": "heroku logs --tail"
   },
   "engines": {
     "node": "10.x"
