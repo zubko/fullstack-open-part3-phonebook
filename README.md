@@ -4,13 +4,9 @@ A tiny phonebook web app.
 
 Keeping the code in the same repo:
 
-<ul style="list-style-type: none;">
-<li> \backend - Node.js server </li>
-<li> \frontend - React UI </li>
-</ul>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\backend - Node.js server<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\frontend - React UI
 
 Running on Heroku:
 
-<ul style="list-style-type: none;">
-<li><a href="https://polite-toque-27621.herokuapp.com/">https://polite-toque-27621.herokuapp.com/</a>
-</ul>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://polite-toque-27621.herokuapp.com/
