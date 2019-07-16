@@ -14,5 +14,5 @@ export default ({ list, onDelete }) => [
       number={p.number}
       onDelete={() => onDelete(p.id)}
     />
-  )),
+  ))
 ];

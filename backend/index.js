@@ -6,42 +6,11 @@ const cors = require("cors");
 const path = require("path");
 const Item = require("./models/Item");
 
-let items = [
-  {
-    name: "Arto Hellas",
-    number: "040-123456",
-    id: 1
-  },
-  {
-    name: "Ada Lovelace",
-    number: "39-44-5323523",
-    id: 2
-  },
-  {
-    name: "Dan Abramov",
-    number: "12-43-234345",
-    id: 3
-  },
-  {
-    name: "Mary Poppendieck",
-    number: "39-23-6423122",
-    id: 4
-  }
-];
-
-const generateNewId = () => {
-  let r;
-  do {
-    r = Math.round(Math.random() * 10000000000 + 1);
-  } while (items.find(i => i.id === r));
-  return r;
-};
-
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-morgan.token("body", (req, res) => JSON.stringify(req.body));
+morgan.token("body", req => JSON.stringify(req.body));
 app.use(
   morgan(
     ":method :url :body - status :status length :res[content-length] - :response-time ms"

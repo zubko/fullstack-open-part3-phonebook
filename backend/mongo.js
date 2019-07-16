@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 
 if (process.argv.length !== 3 && process.argv.length !== 5) {
-  console.log("Error: give url as a param and maybe an item to add");
-  process.exit(1);
+  throw Error("Error: give url as a param and maybe an item to add");
 }
 
 const url = process.argv[2];
