@@ -11,7 +11,8 @@
     "watch": "nodemon backend",
     "build": "cd frontend && yarn install && yarn build",
     "deploy": "git push heroku master",
-    "log": "heroku logs --tail"
+    "logs": "heroku logs --tail",
+    "open": "open https://polite-toque-27621.herokuapp.com/"
   },
   "engines": {
     "node": "10.x"
