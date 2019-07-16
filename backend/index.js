@@ -67,7 +67,7 @@ app.get("/api/persons", (req, res, next) => {
     .catch(error => next(error));
 });
 
-app.get("/api/persons/:id", (req, res) => {
+app.get("/api/persons/:id", (req, res, next) => {
   const id = req.params.id;
   Item.findById(id)
     .then(item => {
@@ -137,6 +137,10 @@ const errorHandler = (error, request, response, next) => {
 
   if (error.name === "CastError" && error.kind == "ObjectId") {
     return response.status(400).send({ error: "malformed id" });
+  }
+
+  if (error.name === "ValidationError") {
+    return response.status(400).send({ error: error.message });
   }
 
   next(error);

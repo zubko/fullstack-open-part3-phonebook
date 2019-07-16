@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const uniqueValidator = require("mongoose-unique-validator");
 mongoose.set("useFindAndModify", false);
 
 const url = process.env.MONGODB_URI;
@@ -15,9 +16,24 @@ mongoose
   });
 
 const schema = new mongoose.Schema({
-  name: String,
-  number: String
+  name: {
+    type: String,
+    required: true,
+    unique: true,
+    minlength: 8
+  },
+  number: {
+    type: String,
+    required: true,
+    unique: true,
+    match: [
+      new RegExp(".*\\d".repeat(8)),
+      "Number should have at least 8 digits."
+    ]
+  }
 });
+
+schema.plugin(uniqueValidator);
 
 schema.set("toJSON", {
   transform: (document, returnedObject) => {

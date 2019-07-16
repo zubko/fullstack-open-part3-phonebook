@@ -69,21 +69,48 @@ const App = () => {
     return false;
   };
 
-  const checkUpdateNumber = () => {
-    const p = persons.find(p => p.name === newName);
-    if (!p) {
+  const checkHandleValidationError = error => {
+    if (error.isAxiosError && error.response && error.response.status === 400) {
+      showError(
+        (error.response.data && error.response.data.error) || error.message
+      );
+      return true;
+    }
+    return false;
+  };
+
+  const checkUpdateExistingNumber = () => {
+    const personByName = persons.find(p => p.name === newName);
+    const personByNumber = persons.find(p => p.number === newNumber);
+    if (personByName && personByNumber) {
+      showError(
+        `There is already person with name ${newName} (number ${personByName.number}) and there is already number ${newNumber} (belonging to ${personByNumber.name})`
+      );
+      return true;
+    }
+    if (!personByName && !personByNumber) {
       return false;
     }
     if (
+      personByName &&
       !window.confirm(
-        `${newName} is already in the phonebook.\nDo you want to update the number?`
+        `Name ${newName} is already in the phonebook.\nDo you want to update the number to ${newNumber}?`
       )
     ) {
       return false;
     }
+    if (
+      personByNumber &&
+      !window.confirm(
+        `Number ${newNumber} is already in the phonebook.\nDo you want to update the name to ${newName}?`
+      )
+    ) {
+      return false;
+    }
+    const p = personByName || personByNumber;
     const id = p.id;
     phonebookService
-      .put(id, { ...p, number: newNumber })
+      .put(id, { ...p, name: newName, number: newNumber })
       .then(updatedPerson => {
         setPersons(persons.map(p => (p.id !== id ? p : updatedPerson)));
         setNewName("");
@@ -95,9 +122,11 @@ const App = () => {
           setNewName("");
           setNewNumber("");
         } else {
-          showError(
-            `Failed to update ${p.name}'s number on the server. ${error}`
-          );
+          if (!checkHandleValidationError(error)) {
+            showError(
+              `Failed to update ${p.name}'s number on the server. ${error}`
+            );
+          }
         }
       });
     return true;
@@ -108,7 +137,7 @@ const App = () => {
     if (!validateInput()) {
       return;
     }
-    if (checkUpdateNumber()) {
+    if (checkUpdateExistingNumber()) {
       return;
     }
     const newPerson = { name: newName, number: newNumber };
@@ -120,7 +149,11 @@ const App = () => {
         setNewName("");
         setNewNumber("");
       })
-      .catch(error => showError(`Failed to add ${newPerson.name}. ${error}`));
+      .catch(error => {
+        if (!checkHandleValidationError(error)) {
+          showError(`Failed to add ${newPerson.name}. ${error}`);
+        }
+      });
   };
 
   const handleDelete = id => {

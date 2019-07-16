@@ -2,6 +2,8 @@ import React from "react";
 
 import Notification from "./Notification";
 
+const NOTIFICATION_VISIBLE_TIME = 5000;
+
 // Class component is better here because we need to provide
 // imperative APIs showError() showMessage() to the client
 // of this component.
@@ -25,7 +27,7 @@ export default class Notifications extends React.Component {
       this.setState(state => ({
         messages: state.messages.filter(m => m.id !== id)
       }));
-    }, 3000);
+    }, NOTIFICATION_VISIBLE_TIME);
   }
 
   showMessage(message) {
