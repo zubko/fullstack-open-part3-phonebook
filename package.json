@@ -16,7 +16,7 @@
     "lint": "yarn eslint --ignore-pattern frontend . && cd frontend && yarn eslint ."
   },
   "engines": {
-    "node": "10.x"
+    "node": "16.x"
   },
   "devDependencies": {
     "eslint": "^6.0.1",
